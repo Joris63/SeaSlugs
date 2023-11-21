@@ -49,6 +49,8 @@ body {
     box-shadow: var(--shadow-elevation-medium);
     border-radius: 24px;
     padding: 24px;
+    transition: all .25s ease;
+    transition-delay: .3s;
 
     &.result {
         max-width: 750px;
@@ -80,7 +82,31 @@ body {
     }
 }
 
+.content_wrapper {
+    transition: all .25s ease;
+    position: relative;
+    height:500px;
+    transition-delay: .3s;
+
+    &.wide {
+        height: 375px
+    }
+}
+
 .uploader_wrapper {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    transition: all 0.3s ease;
+    transition-delay: .75s;
+
+    &.hidden {
+        opacity: 0;
+        transition-delay: 0s;
+    }
 }
 
 .info {
@@ -106,8 +132,7 @@ body {
 }
 
 .image_dropzone {
-    display: grid;
-    place-items: center;
+    position: relative;
     margin-top: 24px;
     width: 100%;
     height: 300px;
@@ -133,9 +158,20 @@ body {
 
 .image_dropzone_description_wrapper,
 .image_preview_wrapper {
+    width: 275px;
+    opacity: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: all 0.25s ease;
+
+    &.hidden {
+        opacity: 0;
+    }
 
     & ion-icon {
         font-size: 50px;
@@ -199,12 +235,37 @@ body {
     }
 }
 
+.image_loader {
+    opacity: 0;
+    transition: all 0.25s ease;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &.shown {
+        opacity: 1;
+    }
+}
+
 .prediction_wrapper {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
     height: 340px;
     gap: 32px;
-    position: relative;
+    opacity: 1;
+    transition: all 0.3s ease;
+    transition-delay: .75s;
+
+    &.hidden {
+        transition-delay: .3s;
+        opacity: 0;
+    }
 }
 
 .uploaded_image_wrapper {
@@ -293,13 +354,17 @@ body {
         padding: 1px 3px;
         display: flex;
         align-items: center;
+        transition: all 0.2s ease;
 
         & .percentage_bar {
+            transition: all 0.2s ease;
             height: 20px;
             border-radius: 10px;
             background: linear-gradient(0deg, hsla(0, 0%, 100%, 1) 0%, hsla(190, 91%, 25%, 1) 100%);
             background: -moz-linear-gradient(0deg, hsla(0, 0%, 100%, 1) 0%, hsla(190, 91%, 25%, 1) 100%);
             background: -webkit-linear-gradient(0deg, hsla(0, 0%, 100%, 1) 0%, hsla(190, 91%, 25%, 1) 100%);
+            width: 0;
+            transition-delay: 0.3s;
         }
 
         & .percentage_value {
@@ -378,7 +443,7 @@ body {
 .prediction_actions {
     opacity: 0;
     pointer-events: none;
-    transition: all .35s ease;
+    transition: all 0.35s ease;
 
     &.loaded {
         opacity: 1;

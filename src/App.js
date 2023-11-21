@@ -4,16 +4,14 @@ import PredictionResult from "./components/PredictionResult";
 import "./styles.scss";
 
 function App() {
-  const [mode, setMode] = useState("upload");
-  const [ready, setReady] = useState(true);
+  const [mode, setMode] = useState("prediction");
 
-  const predictSlug = () => {
+  const changeMode = () => {
     setMode(mode === "upload" ? "prediction" : "upload");
-    setReady(false);
   };
 
   return (
-    <div className="main_wrapper">
+    <div className={`main_wrapper${mode === "upload" ? "" : " result"}`}>
       <div className="title">
         Sea Slug Recognition
         <p className="subtitle">
@@ -23,8 +21,15 @@ function App() {
           </a>
         </p>
       </div>
-      <div className="content_wrapper">
-        <ImageUploader predictSlug={predictSlug}/>
+      <div className={`content_wrapper${mode === "upload" ? "" : " wide"}`}>
+        <ImageUploader
+          changeMode={changeMode}
+          hide={mode !== "upload"}
+        />
+        <PredictionResult
+          hide={mode !== "prediction"}
+          changeMode={changeMode}
+        />
       </div>
     </div>
   );

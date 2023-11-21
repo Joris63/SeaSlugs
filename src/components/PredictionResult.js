@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import Loading from "./Loader";
 
-const PredictionResult = (props) => {
+const PredictionResult = ({ hide, changeMode = () => {} }) => {
   const [ready, setReady] = useState(false);
 
-  useEffect(() => {
-    setTimeout(() => {setReady(true)}, 1500)
-  }, [])
+  const retryPrediction = () => {
+    changeMode();
+    setReady(false);
+  }
 
   return (
-    <div className="prediction_wrapper">
+    <div className={`prediction_wrapper${hide ? " hidden" : ""}`}>
       <div className={`loading_bar${ready ? " loaded" : ""}`}>
         <Loading />
-        <div className="loading_text">Getting Prediction...</div>
+        {!hide  && <div className="loading_text">Getting Prediction...</div>}
       </div>
       <div className={`uploaded_image_wrapper${ready ? " loaded" : ""}`}>
         <img
@@ -53,7 +54,7 @@ const PredictionResult = (props) => {
           <button
             className="submit"
             onClick={() => {
-              setReady(!ready);
+              retryPrediction();
             }}
           >
             Try another
