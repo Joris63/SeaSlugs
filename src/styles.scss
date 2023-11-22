@@ -49,8 +49,8 @@ body {
     box-shadow: var(--shadow-elevation-medium);
     border-radius: 24px;
     padding: 24px;
-    transition: all .25s ease;
-    transition-delay: .3s;
+    transition: all 0.25s ease;
+    transition-delay: 0.3s;
 
     &.result {
         max-width: 750px;
@@ -83,13 +83,13 @@ body {
 }
 
 .content_wrapper {
-    transition: all .25s ease;
+    transition: all 0.25s ease;
     position: relative;
-    height:500px;
-    transition-delay: .3s;
+    height: 500px;
+    transition-delay: 0.3s;
 
     &.wide {
-        height: 375px
+        height: 375px;
     }
 }
 
@@ -101,11 +101,12 @@ body {
     transform: translate(-50%, -50%);
     opacity: 1;
     transition: all 0.3s ease;
-    transition-delay: .75s;
+    transition-delay: 0.75s;
 
     &.hidden {
         opacity: 0;
         transition-delay: 0s;
+        pointer-events: none;
     }
 }
 
@@ -260,11 +261,12 @@ body {
     gap: 32px;
     opacity: 1;
     transition: all 0.3s ease;
-    transition-delay: .75s;
+    transition-delay: 0.75s;
 
     &.hidden {
-        transition-delay: .3s;
+        transition-delay: 0.3s;
         opacity: 0;
+        pointer-events: none;
     }
 }
 
@@ -319,7 +321,6 @@ body {
 .prediction_results {
     display: flex;
     flex-direction: column;
-    gap: 8px;
     margin-bottom: 32px;
 
     &.loaded .result_probability {
@@ -332,10 +333,27 @@ body {
     transform: translateX(35px);
     opacity: 0;
     transition: all 0.35s ease;
+    
+    &:nth-child(1) .slug_name {
+        font-size: 18px;
+    }
 
+    &:nth-child(1) .probability {
+        width: 100%;
+        border-radius: 14px;
+        height: 28px;
+        margin-bottom: 16px;
+
+        & .percentage_bar {
+            height: 20px;
+            border-radius: 10px;
+        }
+    }
+    
     &:nth-child(2) {
         transition-delay: 0.1s;
     }
+
     &:nth-child(3) {
         transition-delay: 0.2s;
     }
@@ -343,13 +361,13 @@ body {
     & .slug_name {
         margin-bottom: 8px;
         font-weight: 700;
-        font-size: 18px;
+        font-size: 16px;
     }
 
     & .probability {
-        width: 100%;
-        border-radius: 14px;
-        height: 28px;
+        width: 80%;
+        border-radius: 12px;
+        height: 24px;
         border: 2px solid #e5e5e5;
         padding: 1px 3px;
         display: flex;
@@ -357,18 +375,16 @@ body {
         transition: all 0.2s ease;
 
         & .percentage_bar {
-            transition: all 0.2s ease;
-            height: 20px;
-            border-radius: 10px;
+            height: 16px;
+            border-radius: 8px;
             background: linear-gradient(0deg, hsla(0, 0%, 100%, 1) 0%, hsla(190, 91%, 25%, 1) 100%);
             background: -moz-linear-gradient(0deg, hsla(0, 0%, 100%, 1) 0%, hsla(190, 91%, 25%, 1) 100%);
             background: -webkit-linear-gradient(0deg, hsla(0, 0%, 100%, 1) 0%, hsla(190, 91%, 25%, 1) 100%);
             width: 0;
-            transition-delay: 0.3s;
         }
 
         & .percentage_value {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 700;
             margin-left: 8px;
             color: #066679;

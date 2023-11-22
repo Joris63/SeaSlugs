@@ -1,24 +1,39 @@
 import { useEffect, useState } from "react";
 import Loading from "./Loader";
 
-const PredictionResult = ({ hide, changeMode = () => {} }) => {
+const PredictionResult = ({
+  hide,
+  data,
+  preview,
+  changeMode = () => {},
+}) => {
   const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    if (data !== null) {
+      setTimeout(() => {
+        setReady(true);
+      }, 250);
+    } else {
+      setReady(false);
+    }
+  }, [data]);
 
   const retryPrediction = () => {
     changeMode();
     setReady(false);
-  }
+  };
 
   return (
     <div className={`prediction_wrapper${hide ? " hidden" : ""}`}>
       <div className={`loading_bar${ready ? " loaded" : ""}`}>
         <Loading />
-        {!hide  && <div className="loading_text">Getting Prediction...</div>}
+        {!hide && <div className="loading_text">Getting Prediction...</div>}
       </div>
       <div className={`uploaded_image_wrapper${ready ? " loaded" : ""}`}>
         <img
           className="uploaded_image"
-          src={process.env.PUBLIC_URL + "slug.jpg"}
+          src={preview}
           alt=""
         ></img>
       </div>
@@ -28,27 +43,18 @@ const PredictionResult = ({ hide, changeMode = () => {} }) => {
           <div className="subtitle">Top 3 matches</div>
         </div>
         <ul className={`prediction_results${ready ? " loaded" : ""}`}>
-          <li className="result_probability">
-            <div className="slug_name">Aeolidiella glauca</div>
-            <div className="probability">
-              <div className="percentage_bar" style={{ width: "64%" }} />
-              <span className="percentage_value">64%</span>
-            </div>
-          </li>
-          <li className="result_probability">
-            <div className="slug_name">Aeolidiella filomenae</div>
-            <div className="probability">
-              <div className="percentage_bar" style={{ width: "23%" }} />
-              <span className="percentage_value">23%</span>
-            </div>
-          </li>
-          <li className="result_probability">
-            <div className="slug_name">Aeolidiella papillosa</div>
-            <div className="probability">
-              <div className="percentage_bar" style={{ width: "13%" }} />
-              <span className="percentage_value">13%</span>
-            </div>
-          </li>
+          {data?.map((slug) => (
+            <li className="result_probability" key={slug.label}>
+              <div className="slug_name">{slug.label}</div>
+              <div className="probability">
+                <div
+                  className="percentage_bar"
+                  style={{ width: `${slug.probability}%` }}
+                />
+                <span className="percentage_value">{slug.probability}%</span>
+              </div>
+            </li>
+          ))}
         </ul>
         <div className={`prediction_actions${ready ? " loaded" : ""}`}>
           <button
