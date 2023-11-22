@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/SeaSlugs/static/css/main.f861d567.css",
+    "main.js": "/SeaSlugs/static/js/main.8eb90de2.js",
+    "index.html": "/SeaSlugs/index.html",
+    "main.f861d567.css.map": "/SeaSlugs/static/css/main.f861d567.css.map",
+    "main.8eb90de2.js.map": "/SeaSlugs/static/js/main.8eb90de2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f861d567.css",
+    "static/js/main.8eb90de2.js"
+  ]
+}
